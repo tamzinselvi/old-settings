@@ -1,0 +1,69 @@
+# Reset the environment on reconnect
+set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
+
+# Use C-a as prefix instead (like gnu screen)
+set -g prefix C-a
+bind C-a send-prefix
+unbind C-b
+
+# Decrease the repeat rate
+set -sg escape-time 0
+set -sg repeat-time 600
+
+# Easier tab navigation
+bind -nr C-Left previous-window
+bind -nr C-Right next-window
+bind -nr M-Left swap-window -t:-
+bind -nr M-Right swap-window -t:+
+
+# Enable mouse actions
+setw -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+
+# Reload the configuration with prefix-r
+bind r source-file ~/.tmux.conf \; display "Reloaded ~/.tmux.conf"
+
+# Sane handling of split windows
+unbind %
+bind | split-window -h
+bind - split-window -v
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
+bind s display-panes
+
+bind -n C-p paste-buffer
+
+# Start counting from 1 to avoid starting on the right
+set -g base-index 1
+
+# Use 256 colors
+set -g default-terminal screen-256color
+
+# Status line colors
+set -g status-bg "#333333"
+set -g status-fg "#338844"
+set -g status-left-length 32
+set -g status-right-length 60
+set -g status-left "#[fg=#cccccc,bold]░ #S ▶"
+set -g status-right "#[fg=#cccccc,bold]◀ #h ░"
+setw -g window-status-format "#I⋆#W ❱"
+setw -g window-status-current-format "#[fg=#33ff66,bg=#333333,bright]#I⋆#W ❱"
+
+# Styles the pane borders
+set -g pane-border-fg "#111111"
+set -g pane-border-bg "#111111"
+
+# Styles the active pane border. Helps when you have more than two panes.
+set-option -g pane-active-border-fg "#333333"
+set-option -g pane-active-border-bg "#000000"
+
+# Set names manually
+setw -g automatic-rename off
+bind c new-window \; command-prompt "rename-window '%%'"
+bind C new-window
+bind , command-prompt "rename-window '%%'"

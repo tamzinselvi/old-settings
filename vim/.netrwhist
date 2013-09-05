@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/usr/share/nginx/html/omar/fusi/function'
+let g:netrw_dirhist_2='/usr/share/nginx/html/omar/fusi'
+let g:netrw_dirhist_3='/etc/nginx/sites-available'
+let g:netrw_dirhist_4='/usr/share/nginx/html/omar'
+let g:netrw_dirhist_5='/etc/nginx/sites-available'
+let g:netrw_dirhist_6='/home/omar'

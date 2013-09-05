@@ -1,0 +1,7 @@
+alias ll=ls -ahl
+export MAIL=~/.Maildir
+export EDITOR=vim
+
+if ( ( [ "$TERM" = "screen" ] || [ "$TERM" = "screen-256color" ] ) && [ -n "$TMUX" ] ); then
+  ranger
+fi

@@ -1,0 +1,48 @@
+# Reset the environment on reconnect
+set -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
+
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-window-option -g mode-mouse on
+set -g mouse-resize-pane on
+
+# Cmatrix screensaver
+set -g lock-after-time 10
+set -g lock-command "cmatrix -sbl"
+
+# Use C-b as prefix instead
+set -g prefix C-b
+bind C-b send-prefix
+unbind C-a
+
+bind r source-file ~/.tmux.conf \; display "Reloaded ~/.tmux.conf"
+
+# Use 256 colors
+set -g terminal screen-256color
+set -g default-terminal "screen-256color"
+
+# Status line colors
+set -g status-bg "#333333"
+set -g status-fg "#338844"
+set -g status-left-length 32
+set -g status-right-length 60
+set -g status-left "#[fg=#cccccc,bold]░ #S ▶"
+set -g status-right "#[fg=#cccccc,bold]◀ #h ░"
+setw -g window-status-format "#I⋆#W ❱"
+setw -g window-status-current-format "#[fg=#33ff66,bg=#333333,bright]#I⋆#W ❱"
+
+# Styles the pane borders
+set -g pane-border-fg "#111111"
+set -g pane-border-bg "#000000"
+
+# Styles the active pane border. Helps when you have more than two panes.
+set-option -g pane-active-border-fg "#333333"
+set-option -g pane-active-border-bg "#333333"
+
+# Set names manually
+setw -g automatic-rename off
+bind c new-window \; command-prompt "rename-window '%%'"
+bind C new-window
+bind , command-prompt "rename-window '%%'"
+bind x kill-pane
